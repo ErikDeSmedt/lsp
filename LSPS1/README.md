@@ -241,17 +241,12 @@ The client MUST check if [option_support_large_channel](https://bitcoinops.org/e
 
 | Code   | Message         | Data | Description |
 | ----   | -------         | ----------- | ---- |
-| -32602 | Invalid params  | {"property": %invalid_property%, "message": %human_message% }    | Invalid method parameter(s). |
 | 1000   | Option mismatch |  {"property": %option_mismatch_property%, "message": %human_message% }   | The order doesnt match the options defined in `lsps1.get_info.options`. |
 | 1001   | Client rejected |  {"message": %human_message% }   | The LSP rejected the client. |
 
 - LSP MUST validate the order against the options defined in `lsps1.get_info.options`. LSP MUST return an `1000` error in case of a mismatch.
   - `%option_mismatch_property%` MUST be one of the fields in `lsps1.get_info.options`.
   - Example: `{ "property": "min_initial_client_balance_sat" }`.
-
-- LSP MUST validate the request fields. LSP MUST return a `-32602` error in case of an invalid request field.
-  - `%invalid_property%` MUST be one of the fields in the request body. MUST use `.` to separate nested fields.
-  - Example: `{ "property": "announceChannel", "message": "Not a boolean" }`.
 
 - LSP MUST validate the `token` field and return an error if the token is invalid.
 
